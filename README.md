@@ -1,8 +1,3 @@
-# React + Vite
+# SG Web Creation - Site Vitrine
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Bienvenue sur le dépôt du site vitrine de **SG Web Creation**, développé avec **React** et **Vite**. Ce site présente l'entreprise et ses services dans la création de sites web.
