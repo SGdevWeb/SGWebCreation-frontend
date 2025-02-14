@@ -4,11 +4,11 @@ import styles from "./Layout.module.scss";
 
 const Layout = ({ children }) => {
   return (
-    <div className={styles.container}>
+    <>
       <Header />
       <main className={styles.content}>{children}</main>
       <Footer />
-    </div>
+    </>
   );
 };
 
