@@ -6,6 +6,10 @@
   h2 {
     margin: 0;
     margin-bottom: 20px;
+    background-image: linear-gradient(to right, white, #006ea3);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
   p {
     line-height: 1.5;
