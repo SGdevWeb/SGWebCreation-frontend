@@ -1,6 +1,7 @@
 import styles from "./Header.module.scss";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo2.png";
+import { HashLink } from "react-router-hash-link";
 const Header = () => {
   return (
     <header className={styles.container}>
@@ -15,9 +16,9 @@ const Header = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="#Services" className={styles.navLink}>
+            <HashLink smooth to="/#services" className={styles.navLink}>
               Services
-            </NavLink>
+            </HashLink>
           </li>
           <li>
             <NavLink to="/support" className={styles.navLink}>

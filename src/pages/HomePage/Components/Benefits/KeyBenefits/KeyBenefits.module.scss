@@ -11,7 +11,7 @@
   height: 0;
   border-left: 30px solid transparent; /* Partie gauche du triangle */
   border-right: 30px solid transparent; /* Partie droite du triangle */
-  border-top: 15px solid rgba(10, 10, 10); /* Couleur du triangle */
+  border-top: 15px solid black; /* Couleur du triangle */
   position: relative;
   z-index: 2;
 }
@@ -21,7 +21,7 @@
   height: 0;
   border-left: 30px solid transparent; /* Partie gauche du triangle */
   border-right: 30px solid transparent; /* Partie droite du triangle */
-  border-bottom: 15px solid rgba(10, 10, 10); /* Couleur du triangle */
+  border-bottom: 15px solid black; /* Couleur du triangle */
   z-index: 2;
   position: relative;
 }
@@ -37,7 +37,7 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: rgba(10, 10, 10);
+  background-color: black;
 }
 
 .rectangleTop {

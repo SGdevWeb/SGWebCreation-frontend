@@ -13,7 +13,7 @@ const HomePage = () => {
       <section>
         <Benefits />
       </section>
-      <section>
+      <section id="services">
         <Services />
       </section>
       <section>

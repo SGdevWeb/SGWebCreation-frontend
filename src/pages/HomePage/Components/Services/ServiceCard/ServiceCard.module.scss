@@ -1,0 +1,44 @@
+.container {
+  border-left: 1px solid #006ea3;
+  border-radius: 10px;
+  background-image: linear-gradient(to right, #000, rgba(20, 20, 20));
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 15px;
+}
+
+.title {
+  font-size: 30px !important;
+  color: #006ea3;
+}
+
+.description {
+  height: 50px;
+  line-height: 2;
+}
+
+.price {
+  font-size: 60px;
+  margin-top: 20px;
+  background-image: linear-gradient(to bottom, white, #006ea3);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.monthly {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: lightgray;
+}
+
+.item {
+  padding: 20px 15px;
+  border-bottom: 1px solid #006ea3;
+  margin: 0 30px;
+}
+
+.item:last-child {
+  border-bottom: none;
+}

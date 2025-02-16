@@ -1,0 +1,74 @@
+.container {
+  margin-top: 100px;
+  h2 {
+    font-size: 40px;
+    text-align: center;
+  }
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.price {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  > div {
+    flex: 1;
+    max-width: 33%;
+  }
+}
+
+.support {
+  border-radius: 15px;
+  border-top: 1px solid #006ea3;
+  border-right: 1px solid #006ea3;
+  margin-top: 20px;
+  .titleSupport {
+    color: #006ea3;
+    display: flex;
+    justify-content: center;
+    h2 {
+      margin: 0;
+      padding: 20px;
+    }
+    .icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      > div {
+        height: 100%;
+      }
+      svg {
+        height: 100%; /* Faire en sorte que l'icône prenne la hauteur du parent */
+        width: auto; /* Conserver les proportions de l'icône */
+      }
+    }
+  }
+  .description {
+    width: 60%;
+    margin: auto;
+    font-size: 1.2rem;
+    text-align: center;
+    line-height: 2;
+  }
+}
+
+.packs {
+  display: flex;
+  justify-content: space-around;
+  > div {
+    flex: 1;
+    max-width: 50%;
+    border-bottom: 1px solid #006ea3;
+    &:first-child {
+      border-right: 1px solid #006ea3;
+    }
+    &:last-child {
+      border-left: 1px solid #006ea3;
+    }
+  }
+}
