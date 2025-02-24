@@ -1,6 +1,6 @@
 import styles from "./Header.module.scss";
 import { Link, NavLink } from "react-router-dom";
-import logo from "../../assets/logo2.png";
+import logo from "../../assets/logo.svg";
 import { HashLink } from "react-router-hash-link";
 const Header = () => {
   return (

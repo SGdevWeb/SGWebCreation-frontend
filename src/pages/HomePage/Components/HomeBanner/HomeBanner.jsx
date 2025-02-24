@@ -1,5 +1,5 @@
 import styles from "./HomeBanner.module.scss";
-import logo from "../../../../assets/logo2.png";
+import logo from "../../../../assets/logo.svg";
 import Card from "../../../../components/Card/Card";
 import {
   faArrowTrendUp,
