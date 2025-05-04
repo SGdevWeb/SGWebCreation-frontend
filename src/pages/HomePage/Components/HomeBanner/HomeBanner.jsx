@@ -7,13 +7,39 @@ import {
   faShieldHalved,
 } from "@fortawesome/free-solid-svg-icons";
 import Btn from "../../../../components/Btn/Btn";
+import { useEffect, useState } from "react";
 
 const HomeBanner = () => {
+  const [showLogo, setShowLogo] = useState(false);
+  const [animateLogoText, setAnimateLogoText] = useState(false);
+
+  useEffect(() => {
+    const logoTimer = setTimeout(() => {
+      setShowLogo(true);
+    }, 1000);
+
+    const textTimer = setTimeout(() => {
+      setAnimateLogoText(true);
+    }, 2000);
+
+    return () => {
+      clearTimeout(logoTimer);
+      clearTimeout(textTimer);
+    };
+  });
+
   return (
     <div className={styles.container}>
       <div className={styles.row}>
         <div className={styles.logo}>
-          <img src={logo} alt="Logo de l'entreprise SG Web Creation" />
+          <img
+            src={logo}
+            alt="Logo de l'entreprise SG Web Creation"
+            className={`${showLogo ? styles.visible : ""}`}
+          />
+          <p className={`${animateLogoText ? styles.animate : ""}`}>
+            WEB CREATION
+          </p>
         </div>
         <div className={styles.slogan}>
           <h1>
@@ -26,6 +52,7 @@ const HomeBanner = () => {
           </div>
         </div>
       </div>
+
       <div className={styles.cards}>
         <Card
           icon={faPaintBrush}
