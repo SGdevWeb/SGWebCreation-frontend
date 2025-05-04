@@ -1,5 +1,5 @@
 import styles from "./HomePage.module.scss";
-import HomeBanner from "./Components/HomeBanner/Homebanner";
+import HomeBanner from "./Components/HomeBanner/HomeBanner";
 import Benefits from "./Components/Benefits/Benefits";
 import Services from "./Components/Services/Services";
 import Achievements from "./Components/Achievements/Achievements";
