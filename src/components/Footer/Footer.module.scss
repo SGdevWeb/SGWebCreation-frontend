@@ -1,0 +1,31 @@
+.container {
+  background-color: #024567;
+  padding: 30px;
+  color: white;
+  a {
+    color: white;
+  }
+}
+
+.row {
+  display: flex;
+}
+
+.left {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.right {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  justify-content: center;
+}
+
+.icon {
+  cursor: pointer;
+}
