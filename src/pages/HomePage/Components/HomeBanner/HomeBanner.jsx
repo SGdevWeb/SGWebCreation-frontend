@@ -12,24 +12,34 @@ import { useEffect, useState } from "react";
 const HomeBanner = () => {
   const [showLogo, setShowLogo] = useState(false);
   const [animateLogoText, setAnimateLogoText] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    const pageTimer = setTimeout(() => {
+      setIsVisible(true);
+    }, 1500);
+
     const logoTimer = setTimeout(() => {
       setShowLogo(true);
-    }, 1000);
+    }, 1500);
 
     const textTimer = setTimeout(() => {
       setAnimateLogoText(true);
-    }, 2000);
+    }, 2500);
 
     return () => {
+      clearTimeout(pageTimer);
       clearTimeout(logoTimer);
       clearTimeout(textTimer);
     };
   });
 
   return (
-    <div className={styles.container}>
+    <div
+      className={`${styles.container} ${
+        isVisible ? styles.fadeIn : styles.hidden
+      }`}
+    >
       <div className={styles.row}>
         <div className={styles.logo}>
           <img

@@ -85,7 +85,10 @@ const data = [
 const Benefits = () => {
   return (
     <div className={styles.container}>
-      <h2>Pourquoi un site web est indispensable ?</h2>
+      <div className={styles.titleContainer}>
+        <h2>Pourquoi un site web est indispensable ?</h2>
+      </div>
+
       {data.map((item, index) => (
         <KeyBenefits
           key={index}

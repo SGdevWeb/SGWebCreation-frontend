@@ -6,7 +6,7 @@ import Achievements from "./Components/Achievements/Achievements";
 
 const HomePage = () => {
   return (
-    <div className={styles.container}>
+    <div className={styles.homepage}>
       <section>
         <HomeBanner />
       </section>

@@ -5,6 +5,14 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  opacity: 0;
+  transition: opacity 2s ease;
+  &.fadeIn {
+    opacity: 1;
+  }
+  &.hidden {
+    opacity: 0;
+  }
 }
 
 .logo {

@@ -5,6 +5,7 @@ import Contact from "./pages/Contact/Contact";
 import Quotation from "./pages/Quotation/Quotation";
 import About from "./pages/About/About";
 import Support from "./pages/Support/Support";
+import AnimatedHome from "./pages/HomePage/AnimatedPage";
 
 export const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <AnimatedHome />,
+      },
+      {
+        path: "home",
         element: <HomePage />,
       },
       {

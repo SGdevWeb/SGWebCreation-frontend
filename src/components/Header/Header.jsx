@@ -4,7 +4,7 @@ import logo from "../../assets/logo.svg";
 import { HashLink } from "react-router-hash-link";
 const Header = () => {
   return (
-    <header className={styles.container}>
+    <header className={`${styles.container} ${styles.animate}`}>
       <Link className={styles.logo} to="/">
         <img src={logo} alt="logo de l'entreprise SG Web Creation" />
       </Link>
