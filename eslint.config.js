@@ -35,5 +35,9 @@ export default [
       ],
       "react/prop-types": "off",
     },
+    env: {
+      browser: true,
+      node: true,
+    },
   },
 ];
