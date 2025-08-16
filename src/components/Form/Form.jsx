@@ -137,7 +137,6 @@ function Form() {
           <div>
             <InputCustom
               id="lastName"
-              // type="text"
               name="lastName"
               placeholder="Nom"
               value={formik.values.lastName}
@@ -203,7 +202,6 @@ function Form() {
             <div>
               <InputCustom
                 id="companyName"
-                // type="text"
                 name="companyName"
                 placeholder="Nom de l'entreprise / organisation"
                 style={{ marginTop: "15px", width: "100%" }}

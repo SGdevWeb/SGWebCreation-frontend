@@ -1,0 +1,48 @@
+$muted: #b7c0d9;
+$border: rgba(255, 255, 255, 0.08);
+$text: #e8eefc;
+
+.faq {
+  max-width: 920px;
+}
+
+.dropdown {
+  margin: 10px 0;
+  border: 1px solid $border;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+}
+
+.summary {
+  cursor: pointer;
+  padding: 14px 16px;
+  font-weight: 600;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  outline: none;
+  color: white;
+  font-size: 1rem;
+}
+
+.answer {
+  color: $text;
+  padding: 14px 16px 18px;
+  line-height: 1.5;
+}
+
+.arrow {
+  margin-left: 8px;
+  transition: transform 0.2s ease;
+  transform: rotate(0deg);
+  color: #006ea3;
+}
+
+.arrow.open {
+  transform: rotate(180deg);
+}

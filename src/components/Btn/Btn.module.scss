@@ -1,3 +1,5 @@
+$border: rgba(255, 255, 255, 0.2);
+
 .btn {
   position: relative;
   display: flex;
@@ -5,18 +7,18 @@
   align-items: center;
   padding: 10px 20px;
   font-size: 16px;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s ease;
 
   background-color: var(--btn-bg, #006ea3);
   color: var(--btn-color, white);
-  border: 1px solid var(--btn-border, #006ea3);
+  border: 1px solid $border;
 
   &:hover {
     background-color: var(--btn-hover-bg, white);
     color: var(--btn-hover-color, #006ea3);
-    border-color: var(--btn-hover-border, #006ea3);
+    border: 1px solid $border;
   }
 }
 

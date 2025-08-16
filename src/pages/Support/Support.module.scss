@@ -1,0 +1,231 @@
+$bg: #0b1220;
+$text: #e8eefc;
+$muted: #b7c0d9;
+$primary: #0283c3;
+$primary-contrast: #051024;
+$ring: rgba(110, 168, 255, 0.45);
+$border: rgba(255, 255, 255, 0.08);
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 1200px;
+  margin-bottom: 50px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 100px;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: $text;
+}
+
+.subtitle {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+}
+
+.lead {
+  color: $muted;
+  font-size: 1.2rem;
+  max-width: 900px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.plans {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  margin-bottom: 100px;
+  > .card {
+    flex: 1 1 280px;
+    min-width: 280px;
+  }
+}
+
+.card {
+  background: linear-gradient(180deg, #121a2b, #0f1728);
+  border: 1px solid $border;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 20px;
+  padding: 18px;
+  h2 {
+    font-size: 20px;
+    margin: 0;
+  }
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid $border;
+  color: $muted;
+}
+
+.badgePrimary {
+  background: $primary;
+  color: $primary-contrast;
+  border-color: transparent;
+}
+
+.cardIntro {
+  color: $muted;
+  margin-bottom: 25px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  li {
+    position: relative;
+    padding-left: 22px;
+    margin-bottom: 15px;
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 4px;
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      background: $primary;
+      box-shadow: 0 0 0 4px rgba(110, 168, 255, 0.18);
+    }
+  }
+}
+
+.ticketing {
+  width: 70%;
+  margin: auto;
+  margin-bottom: 100px;
+}
+
+.ticketingContent {
+  h2 {
+    color: $text;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  p {
+    color: $muted;
+    max-width: 70ch;
+    line-height: 1.8;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background: $primary;
+  color: $primary-contrast;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(110, 168, 255, 0.25);
+  transition: filter 140ms ease, transform 140ms ease, box-shadow 140ms ease;
+  &:hover {
+    filter: brightness(1.02);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(110, 168, 255, 0.32);
+  }
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px $ring;
+  }
+}
+
+.meta {
+  color: $muted;
+  font-size: 14px;
+  align-content: center;
+}
+
+.faq {
+  max-width: 920px;
+  position: relative;
+  h2 {
+    margin: 0;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-top: 5px;
+    border-bottom-left-radius: 15px;
+    border-bottom: 1px solid #006ea3;
+    border-left: 1px solid #006ea3;
+    display: inline-block;
+    text-shadow: 2px 2px 0px #006ea3;
+  }
+}
+
+.faqItem {
+  margin: 10px 0;
+  border: 1px solid $border;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+  summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 14px 16px;
+    font-weight: 600;
+    &::-webkit-details-marker {
+      display: none;
+    }
+  }
+  &[open] summary {
+    border-bottom: 1px solid $border;
+  }
+}
+
+.answer {
+  color: $muted;
+  padding: 14px 16px 18px;
+}
+
+.dropdowns {
+  padding-top: 10px;
+  padding-right: 15px;
+  border-right: 1px solid #006ea3;
+  border-top: 1px solid #006ea3;
+  border-top-right-radius: 10px;
+  margin-left: 14px;
+  position: relative;
+  top: -1px;
+}

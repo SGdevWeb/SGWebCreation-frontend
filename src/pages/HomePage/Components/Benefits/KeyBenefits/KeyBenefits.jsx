@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./KeyBenefits.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 function KeyBenefits({ icon, title, description, impair }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +23,10 @@ function KeyBenefits({ icon, title, description, impair }) {
           </div>
           <div className={styles.chineseHat}></div>
         </div>
-        <div className={styles.texteContainer} onClick={toggleDetails}>
+        <div
+          className={`${styles.texteContainer} ${isOpen ? styles.active : ""}`}
+          onClick={toggleDetails}
+        >
           {title}
         </div>
       </div>
@@ -35,7 +39,9 @@ function KeyBenefits({ icon, title, description, impair }) {
           {description.map((d, index) => (
             <div key={index} className={styles.content}>
               <p>
-                {index + 1} - {d}
+                {/* {index + 1} - {d} */}
+                <FontAwesomeIcon icon={faCheck} className={styles.icon} />
+                {d}
               </p>
             </div>
           ))}
