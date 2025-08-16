@@ -3,6 +3,8 @@ import InputCustom from "../InputCustom/InputCustom";
 import SelectCustom from "../SelectCustom/SelectCustom";
 import styles from "./Form.module.scss";
 import Btn from "../Btn/Btn";
+import { useFormik } from "formik";
+import { contactFormSchema } from "../../ValidationSchemas/contactFormSchema";
 
 const subjectOptionsContact = [
   { value: "", label: "-- Sélectionnez un sujet --" },
@@ -42,23 +44,81 @@ function Form() {
   );
   const [selectedType, setSelectedType] = useState("");
   const [selectedDelay, setSelectedDelay] = useState("");
-
-  const [formData, setFormData] = useState({
-    lastName: "",
-    firstName: "",
-    email: "",
-    companyName: "",
-    projectType: "",
-    projectDescription: "",
-    budget: "",
-    deadline: "",
-    otherDelay: "",
-    subject: subjectOptionsContact[0],
-    otherSubject: "",
-    contactMessage: "",
-  });
-
   const formRef = useRef(null);
+
+  const formik = useFormik({
+    initialValues: {
+      lastName: "",
+      firstName: "",
+      email: "",
+      type: "",
+      companyName: "",
+      projectType: "",
+      projectDescription: "",
+      budget: "",
+      deadline: "",
+      otherDelay: "",
+      subject: "",
+      otherSubject: "",
+      contactMessage: "",
+    },
+    validationSchema: contactFormSchema,
+    onSubmit: async (values) => {
+      const clientId = import.meta.env.VITE_CLIENT_ID;
+      const apiKey = import.meta.env.VITE_API_KEY;
+
+      const subjectString =
+        values.subject === "other"
+          ? values.otherSubject
+          : subjectOptionsContact.find((opt) => opt.value === values.subject)
+              ?.label || "";
+
+      const projectLabel =
+        projectTypeOptions.find((opt) => opt.value === values.projectType)
+          ?.label || "";
+
+      const delayLabel =
+        values.deadline === "other"
+          ? values.otherDelay
+          : delayOptions.find((opt) => opt.value === values.deadline)?.label ||
+            "";
+
+      const budgetValue = values.budget.replace(/[^\d]/g, "");
+
+      const payload = {
+        name: `${values.firstName} ${values.lastName}`,
+        email: values.email,
+        message:
+          values.type === "quote"
+            ? `Entreprise: ${values.companyName}\nProjet: ${projectLabel}\nDescription: ${values.projectDescription}\nBudget: ${budgetValue} euros\nDélai: ${delayLabel}`
+            : `Sujet: ${subjectString}\nMessage:\n${values.contactMessage}`,
+      };
+
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/contact/${clientId}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${apiKey}`,
+            },
+            body: JSON.stringify(payload),
+          }
+        );
+
+        const result = await response.json();
+        if (response.ok) {
+          alert("Message envoyé avec succès !");
+        } else {
+          alert(`Erreur : ${result.error}`);
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Erreur lors de l'envoi du formulaire");
+      }
+    },
+  });
 
   const handleTypeChange = (value) => {
     setSelectedType(value);
@@ -70,104 +130,51 @@ function Form() {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const clientId = import.meta.env.VITE_CLIENT_ID;
-    const apiKey = import.meta.env.VITE_API_KEY;
-
-    const subjectString =
-      formData.subject.value === "other"
-        ? formData.otherSubject
-        : `${formData.subject.label}`;
-
-    const projectLabel =
-      projectTypeOptions.find((opt) => opt.value === formData.projectType)
-        ?.label || "";
-
-    const delayLabel =
-      formData.deadline === "other"
-        ? formData.otherDelay
-        : delayOptions.find((opt) => opt.value === formData.deadline)?.label ||
-          "";
-
-    const budgetValue = formData.budget.replace(/[^\d]/g, "");
-
-    const payload = {
-      name: `${formData.firstName} ${formData.lastName}`,
-      email: formData.email,
-      message:
-        selectedType === "quote"
-          ? `Entreprise: ${formData.companyName}\nProjet: ${projectLabel}\nDescription: ${formData.projectDescription}\nBudget: ${budgetValue} euros\nDelai: ${delayLabel}`
-          : `Sujet: ${subjectString}\nMessage:\n${formData.contactMessage}`,
-    };
-
-    try {
-      const response = await fetch(
-        `http://localhost:3000/api/contact/${clientId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${apiKey}`,
-          },
-          body: JSON.stringify(payload),
-        }
-      );
-
-      const result = await response.json();
-      if (response.ok) {
-        alert("Message envoyé avec succès !");
-      } else {
-        alert(`Erreur : ${result.error}`);
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Erreur lors de l'envoi du formulaire");
-    }
-  };
-
   return (
     <div className={styles.container}>
-      <form ref={formRef} onSubmit={handleSubmit}>
+      <form ref={formRef} onSubmit={formik.handleSubmit}>
         <div className={styles.row}>
           <div>
             <InputCustom
               id="lastName"
-              type="text"
+              // type="text"
               name="lastName"
               placeholder="Nom"
-              value={formData.lastName}
-              onChange={(e) =>
-                setFormData({ ...formData, lastName: e.target.value })
-              }
+              value={formik.values.lastName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
+            {formik.touched.lastName && formik.errors.lastName && (
+              <div className={styles.error}>{formik.errors.lastName}</div>
+            )}
           </div>
           <div>
             <InputCustom
               id="firstName"
-              type="text"
               name="firstName"
               placeholder="Prénom"
-              value={formData.firstName}
-              onChange={(e) =>
-                setFormData({ ...formData, firstName: e.target.value })
-              }
+              value={formik.values.firstName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
+            {formik.touched.firstName && formik.errors.firstName && (
+              <div className={styles.error}>{formik.errors.firstName}</div>
+            )}
           </div>
         </div>
         <div>
           <InputCustom
             id="email"
-            type="text"
             name="email"
             placeholder="Email"
             style={{ marginTop: "15px" }}
-            value={formData.email}
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           />
+          {formik.touched.email && formik.errors.email && (
+            <div className={styles.error}>{formik.errors.email}</div>
+          )}
         </div>
         <div>
           <SelectCustom
@@ -175,7 +182,18 @@ function Form() {
             name="type"
             options={typeOptions}
             value={selectedType}
-            onChange={(e) => handleTypeChange(e.target.value)}
+            onChange={(e) => {
+              const selectedOption = e.target.value;
+              formik.setFieldValue("type", selectedOption);
+              handleTypeChange(selectedOption);
+              if (formRef.current) {
+                formRef.current.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
+              }
+            }}
+            onBlur={() => formik.setFieldTouched("type", true)}
             style={{ marginTop: "15px" }}
           />
         </div>
@@ -185,27 +203,30 @@ function Form() {
             <div>
               <InputCustom
                 id="companyName"
-                type="text"
+                // type="text"
                 name="companyName"
                 placeholder="Nom de l'entreprise / organisation"
                 style={{ marginTop: "15px", width: "100%" }}
-                value={formData.companyName}
-                onChange={(e) =>
-                  setFormData({ ...formData, companyName: e.target.value })
-                }
+                value={formik.values.companyName}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
+              {formik.touched.companyName && formik.errors.companyName && (
+                <div className={styles.error}>{formik.errors.companyName}</div>
+              )}
             </div>
             <SelectCustom
               id="projectType"
               name="projectType"
               options={projectTypeOptions}
-              value={selectedSubject}
-              onChange={(e) => {
-                setSelectedSubject(e.target.value);
-                setFormData({ ...formData, projectType: e.target.value });
-              }}
+              value={formik.values.projectType}
+              onChange={formik.handleChange}
+              onBlur={() => formik.setFieldTouched("projectType", true)}
               style={{ marginTop: "15px", width: "100%" }}
             />
+            {formik.touched.projectType && formik.errors.projectType && (
+              <div className={styles.error}>{formik.errors.projectType}</div>
+            )}
             <textarea
               id="projectDescription"
               name="projectDescription"
@@ -219,48 +240,62 @@ function Form() {
                 border: "1px solid #ccc",
                 resize: "none",
               }}
-              value={formData.projectDescription}
-              onChange={(e) =>
-                setFormData({ ...formData, projectDescription: e.target.value })
-              }
+              value={formik.values.projectDescription}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             ></textarea>
+            {formik.touched.projectDescription &&
+              formik.errors.projectDescription && (
+                <div className={styles.error} style={{ marginTop: "-2px" }}>
+                  {formik.errors.projectDescription}
+                </div>
+              )}
             <InputCustom
               id="budget"
-              type="text"
+              // type="text"
               name="budget"
               placeholder="Budget estimé (€)"
               style={{ marginTop: "15px", width: "100%" }}
               maxLength={5}
-              value={formData.budget}
-              onChange={(e) =>
-                setFormData({ ...formData, budget: e.target.value })
-              }
+              value={formik.values.budget}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
+            {formik.touched.budget && formik.errors.budget && (
+              <div className={styles.error}>{formik.errors.budget}</div>
+            )}
             <SelectCustom
               id="deadline"
               name="deadline"
               options={delayOptions}
+              value={formik.values.deadline}
               onChange={(e) => {
                 setSelectedDelay(e.target.value);
-                setFormData({ ...formData, deadline: e.target.value });
+                formik.handleChange(e);
               }}
+              onBlur={() => formik.setFieldTouched("deadline", true)}
               style={{ marginTop: "15px", width: "100%", color: "white" }}
             />
+            {formik.touched.deadline && formik.errors.deadline && (
+              <div className={styles.error}>{formik.errors.deadline}</div>
+            )}
 
             {selectedDelay === "other" && (
               <InputCustom
                 id="otherDelay"
-                type="text"
+                // type="text"
                 name="otherDelay"
                 placeholder="Précisez un délai"
                 style={{
                   marginTop: "15px",
                 }}
-                value={formData.otherDelay}
-                onChange={(e) =>
-                  setFormData({ ...formData, otherDelay: e.target.value })
-                }
+                value={formik.values.otherDelay}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
+            )}
+            {formik.touched.otherDelay && formik.errors.otherDelay && (
+              <div className={styles.error}>{formik.errors.otherDelay}</div>
             )}
             <div className={styles.btnContainer}>
               <Btn
@@ -288,29 +323,34 @@ function Form() {
               options={subjectOptionsContact}
               value={selectedSubject}
               onChange={(e) => {
-                const value = e.target.value;
-                const optionObj = subjectOptionsContact.find(
-                  (o) => o.value === value
-                );
-                setSelectedSubject(optionObj);
-                setFormData({ ...formData, subject: optionObj });
+                formik.setFieldValue("subject", e.target.value);
+                setSelectedSubject(e.target.value);
               }}
+              onBlur={() => formik.setFieldTouched("subject", true)}
               style={{ marginTop: "15px" }}
             />
 
-            {selectedSubject === "other" && (
+            {formik.touched.subject && formik.errors.subject && (
+              <div className={styles.error}>{formik.errors.subject}</div>
+            )}
+
+            {selectedSubject?.value === "other" && (
               <div>
                 <InputCustom
                   id="otherSubject"
-                  type="text"
+                  // type="text"
                   name="otherSubject"
                   placeholder="Précisez votre sujet"
                   style={{ marginTop: "15px" }}
-                  value={formData.otherSubject}
-                  onChange={(e) =>
-                    setFormData({ ...formData, otherSubject: e.target.value })
-                  }
+                  value={formik.values.otherSubject}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                 />
+                {formik.touched.otherSubject && formik.errors.otherSubject && (
+                  <div className={styles.error}>
+                    {formik.errors.otherSubject}
+                  </div>
+                )}
               </div>
             )}
             <textarea
@@ -326,11 +366,15 @@ function Form() {
                 border: "1px solid #ccc",
                 resize: "none",
               }}
-              value={formData.contactMessage}
-              onChange={(e) =>
-                setFormData({ ...formData, contactMessage: e.target.value })
-              }
+              value={formik.values.contactMessage}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             ></textarea>
+            {formik.touched.contactMessage && formik.errors.contactMessage && (
+              <div className={styles.error} style={{ marginTop: "-2px" }}>
+                {formik.errors.contactMessage}
+              </div>
+            )}
             <div className={styles.btnContainer}>
               <Btn
                 type="submit"
