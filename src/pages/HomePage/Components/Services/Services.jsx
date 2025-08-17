@@ -3,8 +3,12 @@ import ServiceCard from "./ServiceCard/ServiceCard";
 import styles from "./Services.module.scss";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import PackCard from "./PackCard/PackCard";
+import Btn from "../../../../components/Btn/Btn";
+import { useNavigate } from "react-router-dom";
 
 const Services = () => {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.container}>
       <h2>Services & Tarifs</h2>
@@ -91,6 +95,12 @@ const Services = () => {
               ]}
               price="120"
             />
+          </div>
+
+          <div className={styles.btnContainer}>
+            <Btn onClick={() => navigate("/support")}>
+              Découvrir le support en détail
+            </Btn>
           </div>
         </div>
       </div>

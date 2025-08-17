@@ -12,7 +12,6 @@ export default function Dropdown({ title, children }) {
         type="button"
         className={styles.summary}
         onClick={() => setIsOpen(!isOpen)}
-        // aria-expanded={isOpen}
       >
         {title}
         <FontAwesomeIcon

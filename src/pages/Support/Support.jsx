@@ -1,8 +1,13 @@
+import { useEffect } from "react";
 import Btn from "../../components/Btn/Btn";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import styles from "./Support.module.scss";
 
 const Support = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>

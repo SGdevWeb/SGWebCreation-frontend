@@ -46,8 +46,8 @@
         height: 100%;
       }
       svg {
-        height: 100%; /* Faire en sorte que l'icône prenne la hauteur du parent */
-        width: auto; /* Conserver les proportions de l'icône */
+        height: 100%;
+        width: auto;
       }
     }
   }
@@ -74,4 +74,9 @@
       border-left: 1px solid #006ea3;
     }
   }
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: center;
 }

@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "./../../assets/logo.svg";
 import styles from "./AnimatedPage.module.scss";
+import ScrollTopButton from "../../components/ScrollTopButton/ScrollTopButton";
 
 const AnimatedPage = () => {
   const [isRevealed, setIsRevealed] = useState(false);
   const navigate = useNavigate();
+  const [isChecking, setIsChecking] = useState(true);
 
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0]; // Date au format YYYY-MM-DD
@@ -17,6 +19,8 @@ const AnimatedPage = () => {
       return;
     }
 
+    setIsChecking(false);
+
     // Met à jour la date de la dernière animation vue
     setTimeout(() => localStorage.setItem("animationDate", today), 1000);
 
@@ -24,6 +28,8 @@ const AnimatedPage = () => {
     setTimeout(() => setIsRevealed(true), 1000);
     setTimeout(() => navigate("/home", { replace: true }), 2000);
   }, [navigate]);
+
+  if (isChecking) return null;
 
   return (
     <div
@@ -45,6 +51,8 @@ const AnimatedPage = () => {
           isRevealed ? styles.revealed : ""
         }`}
       />
+
+      <ScrollTopButton />
     </div>
   );
 };

@@ -14,7 +14,7 @@ const Achievements = () => {
           <img src={homepage} onClick={handleVisitSite} />
         </div>
         <div className={styles.description}>
-          <h2>Site Web pour esthéticienne</h2>
+          <h2>Site Web Bien-être</h2>
           <p>
             Création d'un site web moderne pour une esthéticienne, incluant une
             interface utilisateur élégante et une interface d'administration

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import InputCustom from "../InputCustom/InputCustom";
 import SelectCustom from "../SelectCustom/SelectCustom";
 import styles from "./Form.module.scss";
@@ -25,8 +25,8 @@ const projectTypeOptions = [
 
 const typeOptions = [
   { value: "", label: "-- Choix du type de demande --" },
-  { value: "quote", label: "Demander un devis" },
   { value: "contact", label: "Demander des informations" },
+  { value: "quote", label: "Demander un devis" },
 ];
 
 const delayOptions = [
@@ -38,13 +38,28 @@ const delayOptions = [
   { value: "other", label: "Autre" },
 ];
 
-function Form() {
+function Form({ initialType = "" }) {
   const [selectedSubject, setSelectedSubject] = useState(
     subjectOptionsContact[0]
   );
-  const [selectedType, setSelectedType] = useState("");
+  const [selectedType, setSelectedType] = useState(initialType);
   const [selectedDelay, setSelectedDelay] = useState("");
   const formRef = useRef(null);
+  const selectRef = useRef(null);
+
+  useEffect(() => {
+    if (initialType) {
+      setSelectedType(initialType);
+      formik.setFieldValue("type", initialType);
+
+      if (formRef.current) {
+        formRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      if (selectRef.current) {
+        selectRef.current.focus();
+      }
+    }
+  }, [initialType]);
 
   const formik = useFormik({
     initialValues: {
@@ -64,8 +79,9 @@ function Form() {
     },
     validationSchema: contactFormSchema,
     onSubmit: async (values) => {
-      const clientId = import.meta.env.VITE_CLIENT_ID;
-      const apiKey = import.meta.env.VITE_API_KEY;
+      const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
+      const API_KEY = import.meta.env.VITE_API_KEY;
+      const API_URL = import.meta.env.VITE_API_URL;
 
       const subjectString =
         values.subject === "other"
@@ -95,17 +111,14 @@ function Form() {
       };
 
       try {
-        const response = await fetch(
-          `http://localhost:3000/api/contact/${clientId}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${apiKey}`,
-            },
-            body: JSON.stringify(payload),
-          }
-        );
+        const response = await fetch(`${API_URL}/contact/${CLIENT_ID}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${API_KEY}`,
+          },
+          body: JSON.stringify(payload),
+        });
 
         const result = await response.json();
         if (response.ok) {
@@ -177,10 +190,11 @@ function Form() {
         </div>
         <div>
           <SelectCustom
+            ref={selectRef}
             id="type"
             name="type"
             options={typeOptions}
-            value={selectedType}
+            value={selectedType || ""}
             onChange={(e) => {
               const selectedOption = e.target.value;
               formik.setFieldValue("type", selectedOption);
@@ -217,7 +231,7 @@ function Form() {
               id="projectType"
               name="projectType"
               options={projectTypeOptions}
-              value={formik.values.projectType}
+              value={formik.values.projectType || ""}
               onChange={formik.handleChange}
               onBlur={() => formik.setFieldTouched("projectType", true)}
               style={{ marginTop: "15px", width: "100%" }}
@@ -250,7 +264,6 @@ function Form() {
               )}
             <InputCustom
               id="budget"
-              // type="text"
               name="budget"
               placeholder="Budget estimé (€)"
               style={{ marginTop: "15px", width: "100%" }}
@@ -266,7 +279,7 @@ function Form() {
               id="deadline"
               name="deadline"
               options={delayOptions}
-              value={formik.values.deadline}
+              value={formik.values.deadline || ""}
               onChange={(e) => {
                 setSelectedDelay(e.target.value);
                 formik.handleChange(e);
@@ -281,7 +294,6 @@ function Form() {
             {selectedDelay === "other" && (
               <InputCustom
                 id="otherDelay"
-                // type="text"
                 name="otherDelay"
                 placeholder="Précisez un délai"
                 style={{
@@ -305,6 +317,8 @@ function Form() {
                   "--btn-hover-bg": "white",
                   "--btn-hover-color": "rgba(2, 69, 103, 1)",
                   "--btn-hover-border": "rgba(2, 69, 103, 1)",
+                  "border-radius": "0",
+                  width: "40%",
                 }}
               >
                 ENVOYER
@@ -319,10 +333,10 @@ function Form() {
               id="subject"
               name="subject"
               options={subjectOptionsContact}
-              value={selectedSubject}
+              value={formik.values.subject || ""}
               onChange={(e) => {
-                formik.setFieldValue("subject", e.target.value);
                 setSelectedSubject(e.target.value);
+                formik.handleChange(e);
               }}
               onBlur={() => formik.setFieldTouched("subject", true)}
               style={{ marginTop: "15px" }}
@@ -332,11 +346,10 @@ function Form() {
               <div className={styles.error}>{formik.errors.subject}</div>
             )}
 
-            {selectedSubject?.value === "other" && (
+            {selectedSubject === "other" && (
               <div>
                 <InputCustom
                   id="otherSubject"
-                  // type="text"
                   name="otherSubject"
                   placeholder="Précisez votre sujet"
                   style={{ marginTop: "15px" }}

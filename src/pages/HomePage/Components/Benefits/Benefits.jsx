@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 import styles from "./Benefits.module.scss";
 import KeyBenefits from "./KeyBenefits/KeyBenefits";
@@ -6,9 +7,7 @@ import {
   faDollarSign,
   faGlobe,
   faLaptop,
-  faRotate,
   faStar,
-  faTrophy,
 } from "@fortawesome/free-solid-svg-icons";
 
 const data = [
@@ -49,27 +48,11 @@ const data = [
     ],
   },
   {
-    icon: faTrophy,
-    title: "Avantage compétitif",
-    description: [
-      "Se démarquer de la concurrence : Si vos concurrents ont déjà un site, il est essentiel de ne pas rester en arrière. S’ils n’en ont pas, vous obtenez un avantage immédiat.",
-      "Publicité en ligne : Avec un site web, vous pouvez utiliser des outils comme Google Ads ou Facebook Ads pour promouvoir vos services.",
-    ],
-  },
-  {
     icon: faDollarSign,
     title: "Rentabilité",
     description: [
       "Coût réduit : Comparé à la publicité traditionnelle (TV, radio, flyers), un site web est un investissement peu coûteux et durable.",
       "Automatisation : Intégrez des fonctionnalités comme des prises de rendez-vous, des paiements en ligne ou des chatbots pour simplifier vos interactions client.",
-    ],
-  },
-  {
-    icon: faRotate,
-    title: "Évolutivité",
-    description: [
-      "Adaptation aux besoins : Vous pouvez ajouter ou modifier des fonctionnalités (e-commerce, blog, espace client) à mesure que votre entreprise grandit.",
-      "Flexibilité : Le site peut être régulièrement mis à jour pour rester en phase avec les tendances du marché et les attentes des clients.",
     ],
   },
   {
@@ -83,21 +66,37 @@ const data = [
 ];
 
 const Benefits = () => {
+  const [activeBenefit, setActiveBenefit] = useState(data[0]);
+
   return (
     <div className={styles.container}>
-      <div className={styles.titleContainer}>
-        <h2>Pourquoi un site web est indispensable ?</h2>
+      <h2 className={styles.title}>Pourquoi un site web est indispensable ?</h2>
+      <div className={styles.hexagonContainer}>
+        {data.map((item, index) => (
+          <div
+            key={index}
+            className={`${styles.hex} ${styles[`hex${index + 1}`]}`}
+            onClick={() => setActiveBenefit(item)}
+          >
+            <KeyBenefits
+              icon={item.icon}
+              title={item.title}
+              description={item.description}
+              isActive={activeBenefit?.title === item.title}
+            />
+          </div>
+        ))}
       </div>
 
-      {data.map((item, index) => (
-        <KeyBenefits
-          key={index}
-          icon={item.icon}
-          title={item.title}
-          description={item.description}
-          impair={index % 2 !== 0}
-        />
-      ))}
+      <div className={styles.detailsContainer}>
+        {activeBenefit && (
+          <div>
+            {activeBenefit.description.map((desc, idx) => (
+              <p key={idx}>{desc}</p>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

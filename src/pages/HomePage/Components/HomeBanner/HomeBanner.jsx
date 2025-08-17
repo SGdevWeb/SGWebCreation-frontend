@@ -9,7 +9,7 @@ import {
 import Btn from "../../../../components/Btn/Btn";
 import { useEffect, useState } from "react";
 
-const HomeBanner = () => {
+const HomeBanner = ({ onGoToServices, onGoToAchievements }) => {
   const [showLogo, setShowLogo] = useState(false);
   const [animateLogoText, setAnimateLogoText] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -57,8 +57,10 @@ const HomeBanner = () => {
             <strong> MAXIMALE</strong>
           </h1>
           <div className={styles.btnContainer}>
-            <Btn>Découvrez nos services</Btn>
-            <Btn variant="secondary">Nos dernières réalisations</Btn>
+            <Btn onClick={onGoToServices}>Découvrez nos services</Btn>
+            <Btn variant="secondary" onClick={onGoToAchievements}>
+              Nos dernières réalisations
+            </Btn>
           </div>
         </div>
       </div>

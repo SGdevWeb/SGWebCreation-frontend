@@ -2,6 +2,7 @@ import styles from "./Header.module.scss";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import { HashLink } from "react-router-hash-link";
+
 const Header = () => {
   return (
     <header className={`${styles.container} ${styles.animate}`}>
@@ -32,7 +33,7 @@ const Header = () => {
           </li>
         </ul>
       </nav>
-      <Link to="/devis" className={styles.quotationButton}>
+      <Link to="/contact?type=quote" className={styles.quotationButton}>
         <button>Demander un devis</button>
       </Link>
     </header>

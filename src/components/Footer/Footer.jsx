@@ -24,8 +24,6 @@ const Footer = () => {
           <div>Mentions légales</div>
         </div>
       </div>
-
-      <div></div>
     </footer>
   );
 };

@@ -1,32 +1,96 @@
 .container {
+  position: relative;
+  width: 100%;
   max-width: 1200px;
-  background: radial-gradient(
-      120% 120% at 0% 0%,
-      rgba(110, 168, 255, 0.14) 0%,
-      rgba(255, 255, 255, 0) 60%
-    ),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0));
-
-  width: 85%;
+  height: 1150px;
   margin: auto;
-  border-radius: 20px;
   padding: 50px;
-  padding-top: 50px;
-  border-left: 1px solid #006ea3;
-  .titleContainer {
-    display: flex;
-    justify-content: center;
-  }
-  h2 {
-    display: inline-block;
-    margin: auto;
-    margin: 0;
-    padding: 15px;
-    margin-bottom: 50px;
-    text-align: center;
-    font-size: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .title {
+    font-size: 2rem;
     font-weight: 400;
-    background: linear-gradient(to right, rgb(3, 3, 3), #006ea3);
+    margin-bottom: 50px;
+    background: linear-gradient(to right, #030303, #006ea3);
     border-radius: 15px;
+    display: inline-block;
+    padding: 15px;
   }
+  &::before {
+    content: "";
+    position: absolute;
+    top: 60%;
+    left: 48%;
+    width: 910px;
+    height: 910px;
+    background-image: url("../../../../assets/logo.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.02;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+}
+
+.hexagonContainer {
+  position: relative;
+  width: 900px;
+  height: 520px;
+  margin: auto;
+}
+
+.hex {
+  position: absolute;
+  width: 150px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hex1 {
+  top: -145px;
+  left: 52.4%;
+  transform: translateX(-50%);
+}
+.hex2 {
+  top: 65px;
+  left: 40px;
+}
+.hex3 {
+  top: 65px;
+  right: 0;
+}
+.hex4 {
+  bottom: -10px;
+  right: 0;
+}
+.hex5 {
+  bottom: -10px;
+  left: 40px;
+}
+.hex6 {
+  bottom: -220px;
+  left: 52.4%;
+  transform: translateX(-50%);
+}
+
+.detailsContainer {
+  position: absolute;
+  top: 60%;
+  left: 48%;
+  transform: translate(-50%, -50%);
+  width: 550px;
+  height: 300px;
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #006ea3;
+  border-top: 1px solid #006ea3;
 }
