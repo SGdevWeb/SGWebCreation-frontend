@@ -1,0 +1,147 @@
+.container {
+  background-color: white;
+  p {
+    margin: 0;
+  }
+}
+
+.content {
+  background-color: white;
+  color: #1a1a1a;
+  width: 1200px;
+  margin: auto;
+  padding: 30px;
+}
+
+.section {
+  margin-bottom: 50px;
+  h3 {
+    text-align: center;
+    color: #006ea3;
+    font-size: 1.5rem;
+  }
+}
+
+.title {
+  font-size: 2.5rem;
+  line-height: 1.1;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: 1px;
+  font-style: italic;
+  background-image: linear-gradient(to right, #006ea3, black);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 100px;
+}
+
+.sectionTitle {
+  font-size: 1.6rem;
+  margin-bottom: 14px;
+  border-bottom: 1px solid #006ea3;
+  background-image: linear-gradient(to right, #006ea3, black);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.services {
+  .sectionTitle {
+    margin-bottom: 40px;
+  }
+}
+
+.list {
+  margin-bottom: 25px;
+  li {
+    position: relative;
+    padding-left: 1.8em;
+    margin: 15px;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}
+
+.text {
+  line-height: 1.5;
+}
+
+.apropos {
+  .text {
+    text-align: center;
+    line-height: 2;
+  }
+  .sectionTitle {
+    margin-bottom: 40px;
+  }
+}
+
+.withIcon {
+  display: flex;
+  margin-right: 10px;
+}
+
+.slogan {
+  font-style: italic;
+  font-size: 1.5rem;
+  margin: 100px;
+  text-align: center;
+}
+
+.quotation {
+  font-style: italic;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.service {
+  background-color: #024567;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 20px;
+  padding: 20px;
+  color: white;
+  width: 500px;
+  margin: auto;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.expertiseCard {
+  width: 40%;
+  border-right: 1px solid #006ea3;
+  border-bottom-right-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 1px 1px 1px #006ea3;
+
+  .subtitle {
+    display: flex;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #006ea3;
+  }
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.icon {
+  margin-right: 10px;
+  color: #006ea3;
+}
+
+.pourquoi {
+  .text {
+    margin-bottom: 10px;
+  }
+}
