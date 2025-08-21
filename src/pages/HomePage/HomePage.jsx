@@ -15,7 +15,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className={styles.homepage}>
+    <div className={styles.container}>
       <section>
         <HomeBanner
           onGoToServices={() => scrollToSection(servicesRef)}

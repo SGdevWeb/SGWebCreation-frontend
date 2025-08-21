@@ -10,8 +10,12 @@ const Achievements = () => {
     <div className={styles.container}>
       <h2 className={styles.sectionTitle}>Mes réalisations</h2>
       <div className={styles.row}>
-        <div className={styles.image}>
-          <img src={homepage} onClick={handleVisitSite} />
+        <div className={styles.imageContainer}>
+          <img
+            className={styles.image}
+            src={homepage}
+            onClick={handleVisitSite}
+          />
         </div>
         <div className={styles.description}>
           <h2>Site Web Bien-être</h2>

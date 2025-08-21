@@ -1,3 +1,5 @@
+@use "../../assets/styles/mixin" as mixin;
+
 .container {
   display: flex;
   justify-content: space-between;
@@ -13,6 +15,9 @@
     opacity: 0;
     animation: slideIn 2s ease-out forwards;
   }
+  // @include mixin.sm {
+  //   height: 50px;
+  // }
 }
 
 @keyframes slideIn {
@@ -35,13 +40,27 @@
   }
 }
 
-.navbar {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%);
-  ul {
+.nav {
+  // position: absolute;
+  // left: 50%;
+  // transform: translate(-50%);
+  // @include mixin.sm {
+  //   position: static;
+  //   left: auto;
+  //   transform: translate(0);
+  // }
+  .headerMenu {
     display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 25px;
+    @include mixin.sm {
+      display: none;
+    }
+    li {
+      display: flex;
+      position: relative;
+    }
   }
 }
 
@@ -69,5 +88,20 @@
       background-color: #006ea3;
       color: white;
     }
+  }
+  @include mixin.sm {
+    display: none;
+  }
+}
+
+.headerMenuMobileIcon {
+  font-size: 24px;
+  display: none;
+  right: 20px;
+  bottom: 40px;
+  cursor: pointer;
+  @include mixin.sm {
+    display: block;
+    position: absolute;
   }
 }

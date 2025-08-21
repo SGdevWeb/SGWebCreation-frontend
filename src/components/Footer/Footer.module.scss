@@ -1,31 +1,73 @@
+@use "../../assets/styles/mixin.scss" as mixin;
+
 .container {
   background-color: #024567;
   padding: 30px;
   color: white;
+
   a {
     color: white;
+  }
+
+  @include mixin.md {
+    padding-bottom: 10px;
+  }
+
+  @include mixin.sm {
+    padding: 20px;
+    font-size: 0.9rem;
   }
 }
 
 .row {
   display: flex;
+  flex-wrap: wrap;
+
+  @include mixin.md {
+    flex-direction: column-reverse;
+    gap: 20px;
+  }
 }
 
-.left {
-  width: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
+.left,
 .right {
   width: 50%;
   display: flex;
   align-items: center;
-  gap: 30px;
   justify-content: center;
+  text-align: center;
+
+  @include mixin.md {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.right {
+  gap: 30px;
+  flex-wrap: wrap;
+
+  @include mixin.md {
+    gap: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  @include mixin.sm {
+    gap: 15px;
+
+    a {
+      font-size: 0.9rem;
+    }
+  }
 }
 
 .icon {
   cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 }

@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Dropdown.module.scss";
 
-export default function Dropdown({ title, children }) {
-  const [isOpen, setIsOpen] = useState(false);
+export default function Dropdown({ title, children, defaultOpen = false }) {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
     <div className={styles.dropdown}>

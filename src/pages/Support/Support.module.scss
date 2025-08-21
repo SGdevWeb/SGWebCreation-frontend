@@ -99,19 +99,20 @@ $border: rgba(255, 255, 255, 0.08);
   padding: 0;
   margin: 0;
   li {
-    position: relative;
     padding-left: 22px;
     margin-bottom: 15px;
+    display: flex;
+    align-items: center;
     &::before {
       content: "";
-      position: absolute;
-      left: 0;
-      top: 4px;
+      display: inline-block;
       width: 10px;
       height: 10px;
       border-radius: 3px;
       background: $primary;
       box-shadow: 0 0 0 4px rgba(110, 168, 255, 0.18);
+      margin-right: 12px;
+      flex-shrink: 0;
     }
   }
 }

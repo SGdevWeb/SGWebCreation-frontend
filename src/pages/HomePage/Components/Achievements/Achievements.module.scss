@@ -1,3 +1,5 @@
+@use "../../../../assets/styles/mixin.scss" as mixin;
+
 .container {
   width: 100%;
   background-color: white;
@@ -6,6 +8,12 @@
   margin: auto;
   padding-top: 60px;
   padding-bottom: 100px;
+  @include mixin.md {
+    padding-top: 20px;
+  }
+  @include mixin.sm {
+    padding-bottom: 30px;
+  }
 }
 
 .sectionTitle {
@@ -19,38 +27,106 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  @include mixin.lg {
+    margin: 0 20px;
+    margin-bottom: 40px;
+  }
+  @include mixin.md {
+    margin: 0;
+    margin: 20px;
+    margin-top: 0;
+    padding: 20px;
+    padding-left: 0;
+    padding-bottom: 10px;
+  }
+  @include mixin.sm {
+    font-size: 1.5rem;
+    padding-top: 0;
+  }
 }
 
 .row {
   display: flex;
-  width: 1200px;
+  max-width: 1200px;
   justify-content: space-between;
   margin: auto;
+  @include mixin.lg {
+    margin: 0 20px;
+  }
+  @include mixin.md {
+    margin: 0 20px;
+  }
+  @include mixin.sm {
+    flex-direction: column;
+  }
+}
+
+.imageContainer {
+  flex: 0 0 700px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+
+  @include mixin.lg {
+    flex: 0 0 50%;
+    height: 400px;
+  }
+
+  @include mixin.md {
+    flex: 0 0 400px;
+    height: auto;
+  }
+
+  @include mixin.sm {
+    flex: 1 1 auto; // Reprend la fluidité
+    width: 100%;
+  }
 }
 
 .image {
-  width: 700px;
-  height: 450px;
-  img {
-    width: 700px;
-    height: 450px;
-    cursor: pointer;
-  }
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
 }
 
 .description {
   margin-left: 50px;
+  @include mixin.md {
+    margin-left: 30px;
+  }
+  @include mixin.sm {
+    margin-left: 0;
+    margin-top: 20px;
+  }
+
   h2 {
-    font-size: 30px;
+    font-size: 2rem;
     border-bottom: none;
     margin-left: 0;
     background-image: linear-gradient(to right, #006ea3, black);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    @include mixin.md {
+      margin-top: 0;
+      font-size: 1.5rem;
+    }
+    @include mixin.sm {
+      font-size: 1.2rem;
+    }
   }
   p {
-    font-size: 20px;
+    font-size: 1.4rem;
     line-height: 1.5;
+    @include mixin.lg {
+      font-size: 1.3rem;
+    }
+    @include mixin.md {
+      margin-top: 0;
+      font-size: 1.2rem;
+      text-align: justify;
+    }
+    @include mixin.sm {
+      font-size: 1rem;
+    }
   }
 }

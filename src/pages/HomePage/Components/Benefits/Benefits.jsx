@@ -9,6 +9,7 @@ import {
   faLaptop,
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
+import KeyBenefitsMobile from "./KeyBenefitsMobile/KeyBenefitsMobile";
 
 const data = [
   {
@@ -71,6 +72,7 @@ const Benefits = () => {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Pourquoi un site web est indispensable ?</h2>
+
       <div className={styles.hexagonContainer}>
         {data.map((item, index) => (
           <div
@@ -85,6 +87,12 @@ const Benefits = () => {
               isActive={activeBenefit?.title === item.title}
             />
           </div>
+        ))}
+      </div>
+
+      <div className={styles.mobile}>
+        {data.map((item, id) => (
+          <KeyBenefitsMobile key={id} item={item} isFirst={id === 0} />
         ))}
       </div>
 

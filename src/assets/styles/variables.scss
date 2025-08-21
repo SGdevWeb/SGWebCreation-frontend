@@ -1,0 +1,17 @@
+:root {
+  --primary-color: #006ea3;
+  --secondary-color: #024567;
+  --font-family: "roboto", sans-serif;
+}
+
+$breakpoints: (
+  "xs": 480px,
+  // petits téléphones
+  "sm": 768px,
+  // tablettes portrait
+  "md": 1024px,
+  // tablettes paysage / petits laptops
+  "lg": 1280px,
+  // écrans laptop standard
+  "xl": 1440px // grands écrans,,,
+);

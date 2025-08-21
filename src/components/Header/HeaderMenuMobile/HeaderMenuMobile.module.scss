@@ -1,0 +1,71 @@
+@use "../../../assets/styles/mixin.scss" as mixin;
+
+.menuMobileContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 500px;
+  height: 100vh;
+  background-color: var(--secondary-color);
+  transition: transform 0.4s ease;
+  transform: translateX(100%); // caché à droite par défaut
+  z-index: 10;
+  overflow-y: auto;
+  @include mixin.md {
+    width: 100%;
+  }
+}
+
+.menuMobileContainer.open {
+  transform: translateX(0); // visible
+}
+
+.menuMobileContainer.closed {
+  transform: translateX(100%); // retourne à droite
+}
+
+.icons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px;
+}
+
+.home {
+  font-size: 24px;
+}
+
+.xmark {
+  font-size: 30px;
+}
+
+.home,
+.xmark {
+  cursor: pointer;
+  color: white;
+}
+
+.menuMobile {
+  padding: 40px;
+  text-align: end;
+  font-size: 1.5rem;
+}
+
+.menuMobileListItem {
+  text-align: center;
+  padding: 15px;
+  cursor: pointer;
+  border-bottom: 2px solid var(--primary-color);
+  &:last-child {
+    border: 0;
+  }
+}
+
+.link {
+  color: white;
+}
+
+.btnContainer {
+  padding: 40px;
+}

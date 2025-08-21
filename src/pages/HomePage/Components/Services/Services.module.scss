@@ -1,26 +1,53 @@
+@use "../../../../assets/styles/mixin.scss" as mixin;
+
 .container {
   max-width: 1200px;
   margin: auto;
   margin-top: 100px;
   margin-bottom: 100px;
+  @include mixin.sm {
+    margin-bottom: 20px;
+  }
   h2 {
-    font-size: 40px;
+    font-size: 2.5rem;
     text-align: center;
+    @include mixin.xs {
+      font-size: 2rem;
+    }
   }
 }
 
 .cardContainer {
   display: flex;
   flex-direction: column;
+  padding: 10px;
 }
 
 .price {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  flex-wrap: wrap;
-  > div {
-    flex: 1;
-    max-width: 33%;
+  @include mixin.md {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: auto;
+    padding: 10px;
+    & > :nth-child(3) {
+      grid-column: 1 / -1; // occupe une ligne
+      justify-self: center; // la centre
+      max-width: 50%; // optionnel : limite la largeur de la carte
+    }
+  }
+  @include mixin.sm {
+    grid-template-columns: 1fr;
+    padding: 40px;
+    & > :nth-child(3) {
+      grid-column: auto; // occupe une ligne
+      justify-self: stretch; // la centre
+      max-width: 100%; // optionnel : limite la largeur de la carte
+    }
+  }
+  @include mixin.sm {
+    padding: 10px;
   }
 }
 
@@ -33,21 +60,33 @@
     color: #006ea3;
     display: flex;
     justify-content: center;
+    @include mixin.sm {
+      flex-direction: column;
+    }
     h2 {
       margin: 0;
       padding: 20px;
+      @include mixin.sm {
+        font-size: 1.7rem;
+      }
     }
     .icon {
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 15px;
+      @include mixin.sm {
+        display: none;
+      }
       > div {
         height: 100%;
       }
       svg {
         height: 100%;
         width: auto;
+        @include mixin.sm {
+          height: 50%;
+        }
       }
     }
   }
@@ -57,21 +96,50 @@
     font-size: 1.2rem;
     text-align: center;
     line-height: 2;
+    @include mixin.sm {
+      width: 80%;
+    }
+    @include mixin.sm {
+      width: 100%;
+      font-size: 1.1rem;
+    }
   }
 }
 
 .packs {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
   > div {
     flex: 1;
-    max-width: 50%;
+    width: 50%;
     border-bottom: 1px solid #006ea3;
+    @include mixin.sm {
+      flex: 0 0 90%;
+    }
     &:first-child {
       border-right: 1px solid #006ea3;
+      @include mixin.lg {
+        margin-right: 30px;
+      }
+      @include mixin.md {
+        margin-right: 20px;
+        margin-left: 20px;
+      }
+      @include mixin.sm {
+      }
     }
     &:last-child {
       border-left: 1px solid #006ea3;
+      @include mixin.lg {
+        margin-left: 30px;
+      }
+      @include mixin.md {
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+      @include mixin.sm {
+      }
     }
   }
 }
@@ -79,4 +147,5 @@
 .btnContainer {
   display: flex;
   justify-content: center;
+  margin-bottom: 10px;
 }

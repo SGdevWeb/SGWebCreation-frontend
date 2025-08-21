@@ -28,7 +28,7 @@ const Services = () => {
           />
           <ServiceCard
             title="Site vitrine"
-            description="Un site vitrine simple et professionnel pour présenter votre entreprise et vos services en ligne"
+            description="Un site vitrine simple et professionnel pour présenter votre entreprise et vos services"
             price="1900"
             items={[
               "Présentation de l'entreprise",
@@ -72,7 +72,7 @@ const Services = () => {
           </div>
           <div className={styles.packs}>
             <PackCard
-              title="Pack de base"
+              title="L'essentiel"
               items={[
                 "Mises à jour régulières du serveur",
                 "Mise à jour du code",
@@ -83,7 +83,7 @@ const Services = () => {
               price="55"
             />
             <PackCard
-              title="Pack complet"
+              title="Le complet"
               items={[
                 "Mises à jour régulières du serveur",
                 "Mise à jour du code",

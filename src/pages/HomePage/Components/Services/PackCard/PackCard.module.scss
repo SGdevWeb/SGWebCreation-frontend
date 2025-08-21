@@ -1,12 +1,24 @@
+@use "../../../../../assets/styles/mixin.scss" as mixin;
+
 .container {
   padding: 20px 50px;
   margin: 30px 100px;
   border-radius: 10px;
   text-align: left;
+  @include mixin.md {
+    padding: 25px;
+  }
   h2 {
     text-align: left;
     margin: 0;
+    @include mixin.sm {
+      text-align: center;
+    }
   }
+  // @include mixin.lg {
+  //   margin: 30px 20px;
+  //   width: 100px;
+  // }
 }
 
 .items {
@@ -19,6 +31,10 @@
 .price {
   font-size: 50px;
   margin: 20px 0;
+  @include mixin.sm {
+    text-align: center;
+    margin-bottom: 40px;
+  }
   span {
     font-size: 30px;
   }

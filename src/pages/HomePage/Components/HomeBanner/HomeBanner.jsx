@@ -57,8 +57,14 @@ const HomeBanner = ({ onGoToServices, onGoToAchievements }) => {
             <strong> MAXIMALE</strong>
           </h1>
           <div className={styles.btnContainer}>
-            <Btn onClick={onGoToServices}>Découvrez nos services</Btn>
-            <Btn variant="secondary" onClick={onGoToAchievements}>
+            <Btn onClick={onGoToServices} buttonStyle={{ width: "80%" }}>
+              Découvrez nos services
+            </Btn>
+            <Btn
+              variant="secondary"
+              onClick={onGoToAchievements}
+              buttonStyle={{ width: "80%" }}
+            >
               Nos dernières réalisations
             </Btn>
           </div>
