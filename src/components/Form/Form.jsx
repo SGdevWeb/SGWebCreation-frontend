@@ -317,7 +317,7 @@ function Form({ initialType = "" }) {
                   "--btn-hover-bg": "white",
                   "--btn-hover-color": "rgba(2, 69, 103, 1)",
                   "--btn-hover-border": "rgba(2, 69, 103, 1)",
-                  "border-radius": "0",
+                  borderRadius: "0",
                   width: "40%",
                 }}
               >
@@ -396,6 +396,8 @@ function Form({ initialType = "" }) {
                   "--btn-hover-bg": "white",
                   "--btn-hover-color": "rgba(2, 69, 103, 1)",
                   "--btn-hover-border": "rgba(2, 69, 103, 1)",
+                  borderRadius: "0",
+                  width: "40%",
                 }}
               >
                 ENVOYER

@@ -14,7 +14,7 @@ const Contact = () => {
       <div className={styles.content}>
         <h1 className={styles.title}>Une question ou un projet ?</h1>
         <div className={styles.column}>
-          <h2>Nous sommes à votre écoute !</h2>
+          <h2 className={styles.columnTitle}>Nous sommes à votre écoute !</h2>
           <p>
             Vous avez une idée en tête ou une question à poser ? Que ce soit
             pour concrétiser un projet ou simplement obtenir des informations,

@@ -77,6 +77,7 @@ const Support = () => {
               onClick={() =>
                 window.open(import.meta.env.VITE_SUPPORT_URL, "_blank")
               }
+              buttonStyle={{ minWidth: "135px" }}
             >
               Ouvrir un ticket
             </Btn>

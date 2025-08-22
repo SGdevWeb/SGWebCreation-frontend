@@ -1,9 +1,14 @@
+@use "../../assets/styles/mixin.scss" as mixin;
+
 .container {
   min-height: calc(100vh - 90px - 92px);
   background-image: url("../../assets/contactBackground.jpg");
   background-size: cover;
   color: black;
   padding-bottom: 50px;
+  @include mixin.sm {
+    padding-bottom: 0;
+  }
 }
 
 .content {
@@ -11,9 +16,12 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: auto;
   font-size: 1.2rem;
   line-height: 2;
+  margin: auto;
+  @include mixin.lg {
+    width: 100%;
+  }
   h2 {
     font-size: 2rem;
   }
@@ -29,15 +37,52 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  @include mixin.md {
+    font-size: 2rem;
+  }
+  @include mixin.sm {
+    font-size: 1.6rem;
+    background-image: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: initial;
+    background-color: black;
+    color: var(--primary-color);
+    padding: 20px;
+    width: 100%;
+    margin: 0;
+    text-align: center;
+  }
 }
 
 .column {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: auto;
   padding: 20px;
   max-width: 700px;
   background-color: rgba(255, 255, 255, 0.1);
+  @include mixin.lg {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+  @include mixin.sm {
+    max-width: 100%;
+    font-size: 1.1rem;
+    padding: 20px 40px;
+  }
+  @include mixin.xs {
+    font-size: 1rem;
+    padding: 20px 10px;
+  }
+  .columnTitle {
+    @include mixin.sm {
+      font-size: 1.4rem;
+    }
+    @include mixin.xs {
+      font-size: 1.3rem;
+      margin: 0;
+    }
+  }
 }
 
 .puces {
@@ -54,4 +99,10 @@
   width: 700px;
   background-color: rgba(2, 69, 103, 0.3);
   padding: 50px;
+  @include mixin.sm {
+    width: 100%;
+  }
+  @include mixin.xs {
+    padding: 20px;
+  }
 }

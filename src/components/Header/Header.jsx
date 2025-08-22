@@ -69,15 +69,4 @@ const Header = () => {
   );
 };
 
-// const Header = () => {
-//   const [showMenu, setShowMenu] = useState(true);
-
-//   return (
-//     <header>
-//       <button onClick={() => setShowMenu(!showMenu)}>Toggle Menu</button>
-//       {showMenu && <HeaderMenuMobile />}
-//     </header>
-//   );
-// };
-
 export default Header;

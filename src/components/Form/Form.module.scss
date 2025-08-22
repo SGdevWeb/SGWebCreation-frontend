@@ -1,8 +1,21 @@
+@use "../../assets/styles/mixin.scss" as mixin;
+
 .row {
   display: flex;
   justify-content: space-between;
+  @include mixin.xs {
+    flex-direction: column;
+  }
   > div {
     width: 47%;
+    @include mixin.xs {
+      width: 100%;
+    }
+    &:last-child {
+      @include mixin.xs {
+        margin-top: 15px;
+      }
+    }
   }
 }
 

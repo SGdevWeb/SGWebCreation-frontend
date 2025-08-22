@@ -50,6 +50,8 @@
   padding: 40px;
   text-align: end;
   font-size: 1.5rem;
+  max-width: 500px;
+  margin: auto;
 }
 
 .menuMobileListItem {
@@ -67,5 +69,6 @@
 }
 
 .btnContainer {
-  padding: 40px;
+  display: flex;
+  margin-top: 100px;
 }

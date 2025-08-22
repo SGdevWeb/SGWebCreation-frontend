@@ -5,7 +5,6 @@ import { faHouse, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { HashLink } from "react-router-hash-link";
 import { useEffect, useState } from "react";
 import Btn from "../../Btn/Btn";
-import { height, width } from "@fortawesome/free-brands-svg-icons/fa42Group";
 
 const HeaderMenuMobile = ({
   showHeaderMenuMobile,
@@ -83,20 +82,22 @@ const HeaderMenuMobile = ({
             Contact
           </Link>
         </li>
+        <li>
+          <Link className={styles.btnContainer} to="/contact?type=quote">
+            <Btn
+              buttonStyle={{
+                width: "100%",
+                borderRadius: "5px",
+                fontSize: "1.2rem",
+                height: "50px",
+              }}
+              onClick={() => setShowHeaderMenuMobile(false)}
+            >
+              Demander un devis
+            </Btn>
+          </Link>
+        </li>
       </ul>
-
-      <div className={styles.btnContainer} to="/contact?type=quote">
-        <Btn
-          buttonStyle={{
-            width: "100%",
-            borderRadius: "5px",
-            fontSize: "1.2rem",
-            height: "50px",
-          }}
-        >
-          Demander un devis
-        </Btn>
-      </div>
     </div>
   );
 };
