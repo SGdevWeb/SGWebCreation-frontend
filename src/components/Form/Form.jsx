@@ -5,6 +5,7 @@ import styles from "./Form.module.scss";
 import Btn from "../Btn/Btn";
 import { useFormik } from "formik";
 import { contactFormSchema } from "../../ValidationSchemas/contactFormSchema";
+import { toast } from "react-toastify";
 
 const subjectOptionsContact = [
   { value: "", label: "-- Sélectionnez un sujet --" },
@@ -78,7 +79,7 @@ function Form({ initialType = "" }) {
       contactMessage: "",
     },
     validationSchema: contactFormSchema,
-    onSubmit: async (values) => {
+    onSubmit: async (values, { resetForm, setSubmitting }) => {
       const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
       const API_KEY = import.meta.env.VITE_API_KEY;
       const API_URL = import.meta.env.VITE_API_URL;
@@ -110,6 +111,8 @@ function Form({ initialType = "" }) {
             : `Sujet: ${subjectString}\nMessage:\n${values.contactMessage}`,
       };
 
+      const toastId = toast.loading("⏳ Envoi du message...");
+
       try {
         const response = await fetch(`${API_URL}/contact/${CLIENT_ID}`, {
           method: "POST",
@@ -122,13 +125,31 @@ function Form({ initialType = "" }) {
 
         const result = await response.json();
         if (response.ok) {
-          alert("Message envoyé avec succès !");
+          toast.update(toastId, {
+            render: "✅ Message envoyé avec succès !",
+            type: "success",
+            isLoading: false,
+            autoClose: 3000,
+          });
+          resetForm();
         } else {
-          alert(`Erreur : ${result.error}`);
+          toast.update(toastId, {
+            render: `❌ Erreur : ${result.error}`,
+            type: "error",
+            isLoading: false,
+            autoClose: 5000,
+          });
         }
       } catch (err) {
         console.error(err);
-        alert("Erreur lors de l'envoi du formulaire");
+        toast.update(toastId, {
+          render: "❌ Erreur lors de l'envoi du formulaire",
+          type: "error",
+          isLoading: false,
+          autoClose: 5000,
+        });
+      } finally {
+        setSubmitting(false);
       }
     },
   });
@@ -319,9 +340,12 @@ function Form({ initialType = "" }) {
                   "--btn-hover-border": "rgba(2, 69, 103, 1)",
                   borderRadius: "0",
                   width: "40%",
+                  opacity: formik.isSubmitting ? 0.6 : 1,
+                  cursor: formik.isSubmitting ? "not-allowed" : "pointer",
                 }}
+                disabled={formik.isSubmitting}
               >
-                ENVOYER
+                {formik.isSubmitting ? "Envoi..." : "Envoyer"}
               </Btn>
             </div>
           </>
@@ -398,9 +422,12 @@ function Form({ initialType = "" }) {
                   "--btn-hover-border": "rgba(2, 69, 103, 1)",
                   borderRadius: "0",
                   width: "40%",
+                  opacity: formik.isSubmitting ? 0.6 : 1,
+                  cursor: formik.isSubmitting ? "not-allowed" : "pointer",
                 }}
+                disabled={formik.isSubmitting}
               >
-                ENVOYER
+                {formik.isSubmitting ? "Envoi..." : "Envoyer"}
               </Btn>
             </div>
           </div>

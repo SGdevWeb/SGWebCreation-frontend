@@ -31,6 +31,23 @@ const data = [
     ],
   },
   {
+    icon: faDollarSign,
+    title: "Rentabilité",
+    description: [
+      "Coût réduit : Comparé à la publicité traditionnelle (TV, radio, flyers), un site web est un investissement peu coûteux et durable.",
+      "Automatisation : Intégrez des fonctionnalités comme des prises de rendez-vous, des paiements en ligne ou des chatbots pour simplifier vos interactions client.",
+    ],
+  },
+  {
+    icon: faGlobe,
+    title: "Accessibilité",
+    description: [
+      "Multi-supports : Un site responsive permet d’être accessible sur ordinateur, tablette et smartphone.",
+      "Personnalisation : Vous pouvez adapter votre contenu à différents publics cibles en fonction de leurs besoins.",
+      "Langues : Si votre marché est international, un site multilingue peut faire la différence.",
+    ],
+  },
+  {
     icon: faLaptop,
     title: "Un outil de communication clé",
     description: [
@@ -39,23 +56,7 @@ const data = [
       "Intégration des réseaux sociaux : Le site devient une plaque tournante pour diriger les visiteurs vers vos pages sociales ou autres canaux.",
     ],
   },
-  {
-    icon: faGlobe,
-    title: "Accessibilité à tous types de clients",
-    description: [
-      "Multi-supports : Un site responsive permet d’être accessible sur ordinateur, tablette et smartphone.",
-      "Personnalisation : Vous pouvez adapter votre contenu à différents publics cibles en fonction de leurs besoins.",
-      "Langues : Si votre marché est international, un site multilingue peut faire la différence.",
-    ],
-  },
-  {
-    icon: faDollarSign,
-    title: "Rentabilité",
-    description: [
-      "Coût réduit : Comparé à la publicité traditionnelle (TV, radio, flyers), un site web est un investissement peu coûteux et durable.",
-      "Automatisation : Intégrez des fonctionnalités comme des prises de rendez-vous, des paiements en ligne ou des chatbots pour simplifier vos interactions client.",
-    ],
-  },
+
   {
     icon: faChartLine,
     title: "Statistiques et analyses",
