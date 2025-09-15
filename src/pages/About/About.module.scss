@@ -1,3 +1,5 @@
+@use "../../assets/styles/mixin.scss" as mixin;
+
 .container {
   background-color: white;
   p {
@@ -11,6 +13,12 @@
   width: 1200px;
   margin: auto;
   padding: 30px;
+  @include mixin.lg {
+    width: 100%;
+  }
+  @include mixin.xs {
+    padding: 15px;
+  }
 }
 
 .section {
@@ -60,6 +68,9 @@
     margin: 15px;
     font-size: 1rem;
     line-height: 1.5;
+    @include mixin.xs {
+      padding-left: 0;
+    }
   }
 }
 
@@ -71,6 +82,7 @@
   .text {
     text-align: center;
     line-height: 2;
+    font-size: 1.2rem;
   }
   .sectionTitle {
     margin-bottom: 40px;
@@ -87,6 +99,10 @@
   font-size: 1.5rem;
   margin: 100px;
   text-align: center;
+  @include mixin.sm {
+    margin: 100px 0 40px 0;
+    font-size: 1.3rem;
+  }
 }
 
 .quotation {
@@ -107,6 +123,10 @@
   margin-bottom: 10px;
   text-align: center;
   font-size: 1.2rem;
+  @include mixin.md {
+    width: 100%;
+    padding: 15px;
+  }
 }
 
 .expertiseCard {
