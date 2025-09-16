@@ -21,7 +21,7 @@ const Footer = () => {
             <FontAwesomeIcon icon={faSquarePhone} size="2x" />
           </a>
           <Link to="/a-propos">A propos</Link>
-          <div>Mentions légales</div>
+          <Link to="/legal">Mentions légales</Link>
         </div>
       </div>
     </footer>

@@ -140,7 +140,15 @@
   justify-content: center;
   text-align: center;
   box-shadow: 1px 1px 1px #006ea3;
-
+  @include mixin.md {
+    width: 50%;
+  }
+  @include mixin.sm {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    margin-bottom: 10px;
+  }
   .subtitle {
     display: flex;
     font-size: 1.2rem;
@@ -149,10 +157,15 @@
   }
 }
 
-.row {
+.cards {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   gap: 20px;
+  padding: 20px;
+  @include mixin.sm {
+    flex-direction: column;
+  }
 }
 
 .icon {

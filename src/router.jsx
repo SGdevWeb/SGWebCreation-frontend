@@ -5,6 +5,7 @@ import Contact from "./pages/Contact/Contact";
 import About from "./pages/About/About";
 import Support from "./pages/Support/Support";
 import AnimatedHome from "./pages/HomePage/AnimatedPage";
+import Legal from "./pages/legal/legal";
 
 export const router = createBrowserRouter(
   [
@@ -31,6 +32,10 @@ export const router = createBrowserRouter(
         {
           path: "a-propos",
           element: <About />,
+        },
+        {
+          path: "legal",
+          element: <Legal />,
         },
       ],
     },

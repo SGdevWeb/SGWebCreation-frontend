@@ -54,7 +54,7 @@ const About = () => {
         <section className={`${styles.section} ${styles.expertise}`}>
           <h2 className={styles.sectionTitle}>Mon expertise</h2>
           <h3>Double compétence unique</h3>
-          <div className={styles.row}>
+          <div className={styles.cards}>
             <div className={styles.expertiseCard}>
               <div className={styles.subtitle}>Développement web</div>
               <p>Du design au code sur-mesure.</p>
