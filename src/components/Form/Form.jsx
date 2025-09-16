@@ -6,6 +6,7 @@ import Btn from "../Btn/Btn";
 import { useFormik } from "formik";
 import { contactFormSchema } from "../../ValidationSchemas/contactFormSchema";
 import { toast } from "react-toastify";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 
 const subjectOptionsContact = [
   { value: "", label: "-- Sélectionnez un sujet --" },
@@ -47,6 +48,8 @@ function Form({ initialType = "" }) {
   const [selectedDelay, setSelectedDelay] = useState("");
   const formRef = useRef(null);
   const selectRef = useRef(null);
+  const contactCaptchaRef = useRef(null);
+  const quoteCaptchaRef = useRef(null);
 
   useEffect(() => {
     if (initialType) {
@@ -79,80 +82,99 @@ function Form({ initialType = "" }) {
       contactMessage: "",
     },
     validationSchema: contactFormSchema,
-    onSubmit: async (values, { resetForm, setSubmitting }) => {
-      const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
-      const API_KEY = import.meta.env.VITE_API_KEY;
-      const API_URL = import.meta.env.VITE_API_URL;
-
-      const subjectString =
-        values.subject === "other"
-          ? values.otherSubject
-          : subjectOptionsContact.find((opt) => opt.value === values.subject)
-              ?.label || "";
-
-      const projectLabel =
-        projectTypeOptions.find((opt) => opt.value === values.projectType)
-          ?.label || "";
-
-      const delayLabel =
-        values.deadline === "other"
-          ? values.otherDelay
-          : delayOptions.find((opt) => opt.value === values.deadline)?.label ||
-            "";
-
-      const budgetValue = values.budget.replace(/[^\d]/g, "");
-
-      const payload = {
-        name: `${values.firstName} ${values.lastName}`,
-        email: values.email,
-        message:
-          values.type === "quote"
-            ? `Entreprise: ${values.companyName}\nProjet: ${projectLabel}\nDescription: ${values.projectDescription}\nBudget: ${budgetValue} euros\nDélai: ${delayLabel}`
-            : `Sujet: ${subjectString}\nMessage:\n${values.contactMessage}`,
-      };
-
-      const toastId = toast.loading("⏳ Envoi du message...");
-
+    onSubmit: async (_, { setSubmitting }) => {
       try {
-        const response = await fetch(`${API_URL}/contact/${CLIENT_ID}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${API_KEY}`,
-          },
-          body: JSON.stringify(payload),
-        });
-
-        const result = await response.json();
-        if (response.ok) {
-          toast.update(toastId, {
-            render: "✅ Message envoyé avec succès !",
-            type: "success",
-            isLoading: false,
-            autoClose: 3000,
-          });
-          resetForm();
-        } else {
-          toast.update(toastId, {
-            render: `❌ Erreur : ${result.error}`,
-            type: "error",
-            isLoading: false,
-            autoClose: 5000,
-          });
+        if (selectedType === "contact") {
+          await contactCaptchaRef.current.execute();
+        } else if (selectedType === "quote") {
+          await quoteCaptchaRef.current.execute();
         }
       } catch (err) {
-        console.error(err);
-        toast.update(toastId, {
-          render: "❌ Erreur lors de l'envoi du formulaire",
-          type: "error",
-          isLoading: false,
-          autoClose: 5000,
-        });
-      } finally {
+        console.error("Erreur hCaptcha :", err);
         setSubmitting(false);
       }
     },
   });
+
+  const handleVerify = async (token) => {
+    const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
+    const API_KEY = import.meta.env.VITE_API_KEY;
+    const API_URL = import.meta.env.VITE_API_URL;
+    const values = formik.values;
+
+    const subjectString =
+      values.subject === "other"
+        ? values.otherSubject
+        : subjectOptionsContact.find((opt) => opt.value === values.subject)
+            ?.label || "";
+
+    const projectLabel =
+      projectTypeOptions.find((opt) => opt.value === values.projectType)
+        ?.label || "";
+
+    const delayLabel =
+      values.deadline === "other"
+        ? values.otherDelay
+        : delayOptions.find((opt) => opt.value === values.deadline)?.label ||
+          "";
+
+    const budgetValue = values.budget.replace(/[^\d]/g, "");
+
+    const payload = {
+      name: `${values.firstName} ${values.lastName}`,
+      email: values.email,
+      message:
+        values.type === "quote"
+          ? `Entreprise: ${values.companyName}\nProjet: ${projectLabel}\nDescription: ${values.projectDescription}\nBudget: ${budgetValue} euros\nDélai: ${delayLabel}`
+          : `Sujet: ${subjectString}\nMessage:\n${values.contactMessage}`,
+      hcaptchaToken: token,
+    };
+
+    const toastId = toast.loading("⏳ Envoi du message...");
+
+    try {
+      const response = await fetch(`${API_URL}/contact/${CLIENT_ID}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${API_KEY}`,
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+      console.log(result);
+      console.log(response);
+      if (response.ok) {
+        toast.update(toastId, {
+          render: "✅ Message envoyé avec succès !",
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+        });
+        formik.resetForm();
+      } else {
+        toast.update(toastId, {
+          render: `❌ Erreur : ${result.error}`,
+          type: "error",
+          isLoading: false,
+          autoClose: 5000,
+        });
+      }
+    } catch (err) {
+      console.error(err);
+      toast.update(toastId, {
+        render: "❌ Erreur lors de l'envoi du formulaire",
+        type: "error",
+        isLoading: false,
+        autoClose: 5000,
+      });
+    } finally {
+      formik.setSubmitting(false);
+      if (selectedType === "contact") contactCaptchaRef.current.resetCaptcha();
+      else if (selectedType === "quote") quoteCaptchaRef.current.resetCaptcha();
+    }
+  };
 
   const handleTypeChange = (value) => {
     setSelectedType(value);
@@ -328,6 +350,14 @@ function Form({ initialType = "" }) {
             {formik.touched.otherDelay && formik.errors.otherDelay && (
               <div className={styles.error}>{formik.errors.otherDelay}</div>
             )}
+
+            <HCaptcha
+              sitekey={import.meta.env.VITE_HCAPTCHA_SITEKEY}
+              size="invisible"
+              ref={quoteCaptchaRef}
+              onVerify={handleVerify}
+            />
+
             <div className={styles.btnContainer}>
               <Btn
                 type="submit"
@@ -365,11 +395,9 @@ function Form({ initialType = "" }) {
               onBlur={() => formik.setFieldTouched("subject", true)}
               style={{ marginTop: "15px" }}
             />
-
             {formik.touched.subject && formik.errors.subject && (
               <div className={styles.error}>{formik.errors.subject}</div>
             )}
-
             {selectedSubject === "other" && (
               <div>
                 <InputCustom
@@ -410,6 +438,14 @@ function Form({ initialType = "" }) {
                 {formik.errors.contactMessage}
               </div>
             )}
+
+            <HCaptcha
+              sitekey={import.meta.env.VITE_HCAPTCHA_SITEKEY}
+              size="invisible"
+              ref={contactCaptchaRef}
+              onVerify={handleVerify}
+            />
+
             <div className={styles.btnContainer}>
               <Btn
                 type="submit"
