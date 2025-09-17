@@ -143,8 +143,7 @@ function Form({ initialType = "" }) {
       });
 
       const result = await response.json();
-      console.log(result);
-      console.log(response);
+
       if (response.ok) {
         toast.update(toastId, {
           render: "✅ Message envoyé avec succès !",
